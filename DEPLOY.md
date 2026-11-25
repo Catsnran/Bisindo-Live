@@ -140,6 +140,7 @@ Trial Railway:
 |---|---|
 | Build error saat `pip install` | Cek **Build Logs**; versi library di `requirements-deploy.txt` dikunci, kirim log error untuk diperbaiki |
 | `File models/best_model.joblib tidak ditemukan` | Folder `models/` belum ter-push ke GitHub; commit & push ulang |
+| `OSError: libEGL.so.1` / `lib....so: cannot open shared object file` | Library sistem untuk MediaPipe kurang di container; tambahkan paketnya di baris `apt-get install` pada `Dockerfile` (sudah berisi `libegl1 libgles2`), lalu commit & push |
 | Halaman *Application failed to respond* | Variabel `PORT` belum `7860` atau port domain bukan `7860` (langkah 3c) |
 | Service berhenti / *out of credit* | Kredit trial habis; pakai cadangan Cloudflare Tunnel (bagian 4) |
 
