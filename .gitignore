@@ -11,3 +11,5 @@ data/
 # Model eksperimen (RandomForest_pipeline.joblib ~70 MB, melebihi batas GitHub 50-100 MB)
 models/all/
 
+# Program cloudflared (diunduh manual, bukan kode proyek)
+cloudflared.exe

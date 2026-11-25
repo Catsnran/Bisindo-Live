@@ -12,7 +12,7 @@ Alur proyek:
 1. **`BISINDO_Training.ipynb`** — preprocessing, ekstraksi fitur, training, evaluasi, menyimpan model terbaik ke `models/`
 2. **`backend/`** — FastAPI memuat model tersebut dan menyajikan REST API `/predict`
 3. **`frontend/`** — website webcam yang memanggil API secara real-time
-4. **`Dockerfile`** — membungkus backend + frontend untuk hosting (lihat `DEPLOY.md`)
+4. **`Dockerfile`** — membungkus server untuk di-hosting di **Railway** (lihat `DEPLOY.md`); `jalankan_demo.bat` sebagai cadangan (laptop + Cloudflare Tunnel)
 
 ## Struktur
 
@@ -31,7 +31,9 @@ PROJECT BISINDO/
     │   └── test_api.py             # uji API dengan gambar dari dataset
     ├── frontend/                   # Bagian 4: index.html, style.css, app.js, logo
     ├── assets/                     # logo PNG/SVG untuk laporan & slide
-    ├── Dockerfile, requirements-deploy.txt, DEPLOY.md   # deployment
+    ├── Dockerfile, requirements-deploy.txt   # container server untuk Railway
+    ├── DEPLOY.md                # panduan deployment & uji deployment
+    ├── jalankan_demo.bat        # cadangan: server di laptop + Cloudflare Tunnel
     ├── data/      (dibuat notebook)
     ├── models/    (dibuat notebook)
     └── reports/   (dibuat notebook)
@@ -123,7 +125,15 @@ Disajikan oleh FastAPI di `/app/`. Buka http://localhost:8000, klik **Mulai Kame
 - Label "Tangan tidak terdeteksi" muncul bila tidak ada tangan di kamera.
 - Video di-mirror lewat CSS saja. Frame yang dikirim ke server tidak di-mirror, supaya konsisten dengan data training.
 
-## 5. Deployment
+## 5. Deployment (link publik)
 
-Lihat **`DEPLOY.md`**: GitHub → Render, serta Cloudflare Tunnel dari laptop sebagai cadangan demo.
-Setiap kali notebook menghasilkan model baru, commit & push file di `models/` agar versi online ikut diperbarui.
+**Utama: Railway** (Trial $5 / 30 hari, tanpa kartu kredit, link tetap `https://<nama>.up.railway.app`):
+
+1. Upload folder `bisindo_ml` ke GitHub (repo `bisindo-live`), termasuk `models/`.
+2. Di https://railway.com: **Login with GitHub** → **New Project** → **Deploy from GitHub repo** → pilih `bisindo-live`.
+3. Tambah variabel `PORT` = `7860`, lalu **Settings → Networking → Generate Domain** (port `7860`).
+4. Buka `https://<nama>.up.railway.app`.
+
+**Cadangan: laptop + Cloudflare Tunnel.** Klik dua kali **`jalankan_demo.bat`**, lalu bagikan link `https://....trycloudflare.com` yang muncul. Link ini berganti setiap sesi.
+
+Panduan lengkap, solusi error, dan tabel uji deployment ada di **`DEPLOY.md`**.

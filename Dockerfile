@@ -1,4 +1,4 @@
-# Dockerfile — server BISINDO Live (FastAPI + frontend) untuk deployment di Render.
+# Dockerfile — server BISINDO Live (FastAPI + frontend) dalam container (opsional, siap dipindah ke hosting).
 # Build & jalankan lokal:
 #   docker build -t bisindo-live .
 #   docker run -p 7860:7860 bisindo-live      -> buka http://localhost:7860
@@ -30,7 +30,7 @@ COPY --chown=user models/best_model.joblib models/scaler.joblib models/label_enc
 
 USER user
 
-# Render mengisi variabel PORT sendiri; 7860 hanya nilai bawaan untuk uji lokal
+# Port bisa diatur lewat variabel PORT (bawaan 7860)
 ENV PORT=7860
 EXPOSE 7860
 CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-7860}"]
