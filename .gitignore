@@ -1,0 +1,13 @@
+# Lingkungan Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Data besar (bisa dibuat ulang dengan notebook)
+data/
+
+# Model eksperimen (RandomForest_pipeline.joblib ~70 MB, melebihi batas GitHub 50-100 MB)
+models/all/
+

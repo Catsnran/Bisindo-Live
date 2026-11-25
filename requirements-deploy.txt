@@ -1,0 +1,12 @@
+# Dependensi server saja (tanpa pandas/matplotlib/jupyter).
+# Versi DIKUNCI sama dengan .venv tempat model dilatih: file .joblib hanya
+# dijamin bisa dimuat dengan versi scikit-learn yang sama.
+# OpenCV ikut terpasang otomatis sebagai dependensi mediapipe.
+mediapipe==1.2.3
+numpy==2.5.4
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+fastapi==0.162.6
+uvicorn[standard]==0.54.0
+python-multipart==0.0.33

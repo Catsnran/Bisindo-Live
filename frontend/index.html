@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BISINDO Live Classifier</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img class="logo" src="logo.svg" alt="" width="50" height="50" />
+      <div>
+        <h1>BISINDO Live</h1>
+        <p class="sub">Klasifikasi huruf Bahasa Isyarat Indonesia secara real-time</p>
+      </div>
+    </div>
+    <div class="server" id="serverStatus">
+      <span class="dot"></span><span class="label">Memeriksa server…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- Kolom kiri: kamera -->
+    <section class="camera-card">
+      <div class="stage" id="stage">
+        <video id="video" autoplay playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <div class="stage-msg" id="stageMsg"><span>Klik <b>Mulai Kamera</b><br />untuk memulai 📸</span></div>
+        <div class="no-hand" id="noHand" hidden>Tangan tidak terdeteksi</div>
+      </div>
+      <div class="controls">
+        <button id="btnStart" class="primary">Mulai Kamera</button>
+        <button id="btnStop" disabled>Berhenti</button>
+        <label class="toggle"><input type="checkbox" id="chkLandmarks" checked /> Tampilkan landmark</label>
+        <label class="toggle"><input type="checkbox" id="chkMirror" checked /> Mode cermin</label>
+      </div>
+      <div class="stats">
+        <div><span id="statFps">0</span><small>prediksi/detik</small></div>
+        <div><span id="statLatency">–</span><small>latensi (ms)</small></div>
+        <div><span id="statHands">0</span><small>tangan</small></div>
+        <div><span id="statModel">–</span><small>model</small></div>
+      </div>
+    </section>
+
+    <!-- Kolom kanan: hasil -->
+    <section class="result-card">
+      <div class="letter-box">
+        <div class="letter idle" id="letter">–</div>
+        <div class="conf-bar"><div id="confFill"></div></div>
+        <div class="conf-text"><span id="confText">confidence –</span> · <span id="voteText">voting –</span></div>
+      </div>
+
+      <div class="block">
+        <h3>Kandidat teratas (frame terakhir)</h3>
+        <ul class="topk" id="topk"></ul>
+      </div>
+
+      <div class="block">
+        <h3>Teks tersusun</h3>
+        <div class="sentence" id="sentence"><span class="placeholder">Tahan satu huruf ± 1 detik untuk menambahkannya…</span></div>
+        <div class="hold"><div id="holdFill"></div></div>
+        <div class="row">
+          <button id="btnSpace">Spasi</button>
+          <button id="btnBack">Hapus</button>
+          <button id="btnClear">Reset</button>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Riwayat huruf</h3>
+        <div class="history" id="history"></div>
+      </div>
+
+      <details class="block settings">
+        <summary>Pengaturan</summary>
+        <label>Server API <input type="text" id="apiUrl" /></label>
+        <label>Interval kirim frame: <b id="fpsVal">5</b> fps
+          <input type="range" id="fpsRange" min="1" max="10" value="5" /></label>
+        <label>Jendela voting: <b id="winVal">7</b> frame
+          <input type="range" id="winRange" min="3" max="15" value="7" /></label>
+        <label>Ambang confidence: <b id="thrVal">0.60</b>
+          <input type="range" id="thrRange" min="0.3" max="0.95" step="0.05" value="0.6" /></label>
+        <label>Lama tahan untuk menambah huruf: <b id="holdVal">1.0</b> s
+          <input type="range" id="holdRange" min="0.4" max="3" step="0.1" value="1.0" /></label>
+      </details>
+    </section>
+  </main>
+
+  <canvas id="capture" hidden></canvas>
+  <script src="app.js"></script>
+</body>
+</html>

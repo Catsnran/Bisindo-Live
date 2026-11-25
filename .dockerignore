@@ -1,0 +1,9 @@
+.venv/
+**/__pycache__/
+data/
+reports/
+assets/
+models/all/
+*.ipynb
+.ipynb_checkpoints/
+.git/

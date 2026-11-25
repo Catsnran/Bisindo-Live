@@ -1,0 +1,48 @@
+{
+  "best_model": "SVM",
+  "best_params": {
+    "C": 100,
+    "gamma": "scale",
+    "kernel": "rbf"
+  },
+  "cv_f1_macro": 0.9769434347301298,
+  "test_metrics": {
+    "accuracy": 0.9828420589529256,
+    "precision_macro": 0.9831145002834016,
+    "recall_macro": 0.982876741751149,
+    "f1_macro": 0.9828611564342309
+  },
+  "classes": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z"
+  ],
+  "num_features": 126,
+  "feature_spec": "2 tangan x 21 landmark x (x,y,z); relatif wrist, dibagi jarak maks ke wrist; tangan diurutkan berdasarkan x wrist; zero-padding bila 1 tangan",
+  "n_train": 9092,
+  "n_test": 2273,
+  "trained_at": "2026-11-25T23:11:39"
+}
